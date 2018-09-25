@@ -8,8 +8,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <m:Map Grid.Column="1"
-               CredentialsProvider="Atu4AQp2CNh0a2jeTlH3PwPWtCV-DyjxvTL2f4k2COQmV6407he4vlP2aJw9fZju"
-               ZoomLevel="16"></m:Map>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Zip Code:" />
+                    <TextBox  Width="65" />                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Size Lo" />
+                    <TextBox  Width="65" />
+                    <Label Content="Size Hi" />
+                    <TextBox  Width="65" />
+                </StackPanel>
+            </StackPanel>
+            <m:Map Grid.Column="1"
+                   CredentialsProvider="Atu4AQp2CNh0a2jeTlH3PwPWtCV-DyjxvTL2f4k2COQmV6407he4vlP2aJw9fZju"
+                   ZoomLevel="16"></m:Map>
+        </Grid>
+
     </Grid>
 </Window>
