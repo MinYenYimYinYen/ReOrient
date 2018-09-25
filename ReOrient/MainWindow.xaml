@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReOrient"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:mod="clr-namespace:ReOrient.Models"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <mod:MapController x:Key="MapController" />
+    </Window.Resources>
     <Grid>
-        <Grid>
+        <Grid DataContext="{Binding Source={StaticResource MapController}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
@@ -27,7 +31,8 @@
             </StackPanel>
             <m:Map Grid.Column="1"
                    CredentialsProvider="Atu4AQp2CNh0a2jeTlH3PwPWtCV-DyjxvTL2f4k2COQmV6407he4vlP2aJw9fZju"
-                   ZoomLevel="16"></m:Map>
+                   ZoomLevel="16"
+                   Center="{Binding Path=MapCenter}"></m:Map>
         </Grid>
 
     </Grid>
