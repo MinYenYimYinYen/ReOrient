@@ -1143,6 +1143,7 @@
     <Compile Include="SA\zone.cs">
       <DependentUpon>SADBContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Threading\TextArgs.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
