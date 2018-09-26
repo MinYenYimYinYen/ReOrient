@@ -33,7 +33,7 @@
                    CredentialsProvider="Atu4AQp2CNh0a2jeTlH3PwPWtCV-DyjxvTL2f4k2COQmV6407he4vlP2aJw9fZju"
                    ZoomLevel="16"
                    Center="{Binding Path=MapCenter}">
-                <m:MapItemsControl ItemsSource="{Binding Path=Records}">
+                <m:MapItemsControl ItemsSource="{Binding Path=Records, Mode=TwoWay}">
                     <m:MapItemsControl.ItemTemplate>
                         <DataTemplate>
                             <m:Pushpin Location="{Binding Path=Location}"></m:Pushpin>

@@ -13,7 +13,7 @@ namespace ReOrient.Models
 		{
 			get
 			{
-				return "20,20";
+				return "45.26653,-93.77274";
 			}
 		}
 		public string MapMode { get; set; }
@@ -28,6 +28,7 @@ namespace ReOrient.Models
 			}
 			set
 			{
+				
 				records = value;
 			}
 		}
@@ -76,11 +77,12 @@ namespace ReOrient.Models
 
 		private void LoadRecords()
 		{
+
 			if (SizeLo != null && SizeHi != null)
 			{
 				if (zipCode.Length == 5)
 				{
-					using (var sa = new SA.SAEntities1())
+					using (var sa = new SA.SADBContext())
 					{
 						var recs = new ObservableCollection<Record>();
 
@@ -97,12 +99,13 @@ namespace ReOrient.Models
 						var filterSize = recs.Where(r => r.Size >= SizeLo)
 							.Where(r => r.Size <= SizeHi).ToList();
 
+						Records.Clear();
 						foreach (var mark in filterSize)
 						{
-							rMe.Add(new Record { MarkCust = mark.MarkCust });
+							Records.Add(new Record { MarkCust = mark.MarkCust });
 						}
 
-						Records = rMe;
+						//Records = rMe;
 					}
 				}
 			}
