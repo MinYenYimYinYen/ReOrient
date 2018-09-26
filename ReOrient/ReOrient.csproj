@@ -66,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\BingControl.cs" />
     <Compile Include="Models\MapController.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="SA\account.cs">
