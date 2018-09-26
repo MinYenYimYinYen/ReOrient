@@ -122,7 +122,7 @@ namespace ReOrient
 						var filterSize = recs.Where(r => r.Size >= SizeLo)
 							.Where(r => r.Size <= SizeHi).ToList();
 
-						this.Dispatcher.Invoke(() => ClearRecords());
+						this.Dispatcher.Invoke(() => Records.Clear());
 
 						foreach (var mark in filterSize)
 						{

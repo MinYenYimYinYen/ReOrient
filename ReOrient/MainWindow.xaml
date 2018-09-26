@@ -35,10 +35,29 @@
                    CredentialsProvider="Atu4AQp2CNh0a2jeTlH3PwPWtCV-DyjxvTL2f4k2COQmV6407he4vlP2aJw9fZju"
                    ZoomLevel="16"
                    Center="{Binding Path=MapCenter}">
+                <m:Map.Resources>
+                    <ControlTemplate x:Key="PushPinTemplate" TargetType="{x:Type m:Pushpin}">
+                        <Grid x:Name="grd_PushPin" HorizontalAlignment="Left">
+                            <Ellipse Name="elps_Pin" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="4"
+                                     Height="{Binding Height, ElementName=grd_PushPin}" Width="{Binding Width, ElementName=grd_PushPin}"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Height="{Binding Height, ElementName=grd_PushPin}" Width="{Binding Width, ElementName=grd_PushPin}"
+                                              Margin="0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </m:Map.Resources>
                 <m:MapItemsControl ItemsSource="{Binding Path=Records, Mode=TwoWay}">
                     <m:MapItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <m:Pushpin Location="{Binding Path=Location}"></m:Pushpin>
+                            <m:Pushpin Location="{Binding Path=Location}"
+                                       Template="{StaticResource PushPinTemplate}" Opacity="1"
+                                       Background="LightGray" Width="Auto" Height="Auto">
+                                <m:Pushpin.Content>
+                                    <StackPanel>
+                                        <Label Content="{Binding Path=MarkCust.cust_no}"/>
+                                    </StackPanel>
+                                </m:Pushpin.Content>
+                            </m:Pushpin>
                         </DataTemplate>
                     </m:MapItemsControl.ItemTemplate>
                 </m:MapItemsControl>
