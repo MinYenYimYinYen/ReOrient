@@ -83,10 +83,24 @@ namespace ReOrient.Models
 					using (var sa = new SA.SAEntities1())
 					{
 						var recs = new ObservableCollection<Record>();
-						foreach (var mark in sa.markcusts.Where(m => m.zip.Trim().Substring(0, 5) == zipCode))
+
+						//Filter By Zip
+						foreach (var mark in sa.markcusts
+							.Where(m => m.zip.Trim().Substring(0, 5) == zipCode))
+
 						{
 							recs.Add(new Record { MarkCust = mark });
 						}
+
+						//Filter by Size
+						var filterSize = recs.Where(r=>r.Size>=SizeLo)
+							.Where(r=>r.Size <= SizeHi).ToList();
+						
+						foreach(var mark in filterSize)
+						{
+							recs.Add(new Record { MarkCust = mark.MarkCust });
+						}
+
 						Records = recs;
 					}
 				}

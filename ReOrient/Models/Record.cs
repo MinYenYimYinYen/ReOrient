@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,16 @@ namespace ReOrient.Models
 				return str.ToString();
 			}
 		}
+
+		public Location Location
+		{
+			get
+			{
+				return BingControl.getBingLocation(this,BingControl.MatchCode.Good,BingControl.Confidence.High);
+			}
+		}
+
+		public decimal Size => (decimal)(MarkCust.size == null ? 0 : MarkCust.size);
 
 	}
 }
