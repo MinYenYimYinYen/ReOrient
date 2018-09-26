@@ -19,7 +19,6 @@ namespace ReOrient.Models
 			Size99 = new Command(_Size99, _Size99Exec); //Over 24 
 			Size0 = new Command(_Size0, _Size0Exec); //Unmeasured
 			Size77707 = new Command(_Size77707, _Size77707Exec); //Not Found
-
 		}
 
 
@@ -35,7 +34,7 @@ namespace ReOrient.Models
 			var rec = (Record)RecordObj;
 			rec.MarkCust.size = (decimal)777.01;
 			MainWindow.sa.SaveChanges();
-			this.Visibility = "Collapsed";
+			
 		}
 		private bool _Size77701Exec(object RecordObj)
 		{
@@ -43,7 +42,9 @@ namespace ReOrient.Models
 		}
 		private void _Size77799(object RecordObj)
 		{
-
+			var rec = (Record)RecordObj;
+			rec.MarkCust.size = (decimal)777.99;
+			MainWindow.sa.SaveChanges();
 		}
 		private bool _Size77799Exec(object RecordObj)
 		{
@@ -51,7 +52,9 @@ namespace ReOrient.Models
 		}
 		private void _Size99(object RecordObj)
 		{
-
+			var rec = (Record)RecordObj;
+			rec.MarkCust.size = (decimal)99;
+			MainWindow.sa.SaveChanges();
 		}
 		private bool _Size99Exec(object RecordObj)
 		{
@@ -60,7 +63,9 @@ namespace ReOrient.Models
 
 		private void _Size0(object RecordObj)
 		{
-
+			var rec = (Record)RecordObj;
+			rec.MarkCust.size = (decimal)0;
+			MainWindow.sa.SaveChanges();
 		}
 		private bool _Size0Exec(object RecordObj)
 		{
@@ -68,26 +73,15 @@ namespace ReOrient.Models
 		}
 		private void _Size77707(object RecordObj)
 		{
-
+			var rec = (Record)RecordObj;
+			rec.MarkCust.size = (decimal)777.07;
+			MainWindow.sa.SaveChanges();
 		}
 		private bool _Size77707Exec(object RecordObj)
 		{
 			return true;
 		}
 		#endregion
-
-		private string visibility = "Visible";
-		public string Visibility
-		{
-			get
-			{
-				return visibility;
-			}
-			set
-			{
-				visibility = value;
-			}
-		}
 
 		public SA.markcust MarkCust { get; set; }
 		public string Address

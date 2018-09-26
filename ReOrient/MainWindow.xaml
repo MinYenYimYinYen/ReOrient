@@ -50,13 +50,21 @@
                     <m:MapItemsControl.ItemTemplate>
                         <DataTemplate>
                             <m:Pushpin Location="{Binding Path=Location}"
-                                       Template="{StaticResource PushPinTemplate}" Opacity="1"
-                                       Background="LightGray" Width="Auto" Height="Auto">
+                                       Template="{StaticResource PushPinTemplate}" Opacity=".5"
+                                       Width="Auto" Height="Auto" Foreground="Blue" >
                                 <m:Pushpin.Content>
                                     <StackPanel>
                                         <Label Content="{Binding Path=MarkCust.cust_no}"/>
-                                        <Button Name="btn_Commercial" Content=".01" Command="{Binding Path=Size77701}" CommandParameter="{Binding}"
-                                                Visibility="{Binding Path=Visibility}"/>
+                                        <Button Name="btn_Commercial" Content="777.01" Command="{Binding Path=Size77701}" CommandParameter="{Binding}"
+                                                Click="Disappear" />
+                                        <Button Name="btn_UnmeasurableSMall" Content="777.99" Command="{Binding Path=Size77799}" CommandParameter="{Binding}"
+                                                Click="Disappear" />
+                                        <Button Name="btn_Over24" Content="99" Command="{Binding Path=Size99}" CommandParameter="{Binding}"
+                                                Click="Disappear" />
+                                        <Button Name="btn_0" Content="0.00" Command="{Binding Path=Size0}" CommandParameter="{Binding}"
+                                                Click="Disappear" />
+                                        <Button Name="btn_NotFound" Content="777.07" Command="{Binding Path=Size77707}" CommandParameter="{Binding}"
+                                                Click="Disappear" />
                                     </StackPanel>
                                 </m:Pushpin.Content>
                             </m:Pushpin>

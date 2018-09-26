@@ -136,7 +136,15 @@ namespace ReOrient
 			}
 		}
 
-		
+		private void Disappear(object sender, RoutedEventArgs e)
+		{
+			var btn = (Button)sender;
+			var x = VisualTreeHelper.GetParent(btn);
+			var y = VisualTreeHelper.GetParent(x);
+			var z = VisualTreeHelper.GetParent(y);
+			Pushpin a = (Pushpin)VisualTreeHelper.GetParent(z);
+			a.Visibility = Visibility.Collapsed;
+		}
 
 
 	}
