@@ -34,7 +34,11 @@
                    ZoomLevel="16"
                    Center="{Binding Path=MapCenter}">
                 <m:MapItemsControl ItemsSource="{Binding Path=Records}">
-                    
+                    <m:MapItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <m:Pushpin Location="{Binding Path=Location}"></m:Pushpin>
+                        </DataTemplate>
+                    </m:MapItemsControl.ItemTemplate>
                 </m:MapItemsControl>
             </m:Map>
         </Grid>
