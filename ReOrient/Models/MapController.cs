@@ -93,15 +93,16 @@ namespace ReOrient.Models
 						}
 
 						//Filter by Size
-						var filterSize = recs.Where(r=>r.Size>=SizeLo)
-							.Where(r=>r.Size <= SizeHi).ToList();
-						
-						foreach(var mark in filterSize)
+						var rMe = new ObservableCollection<Record>(); 
+						var filterSize = recs.Where(r => r.Size >= SizeLo)
+							.Where(r => r.Size <= SizeHi).ToList();
+
+						foreach (var mark in filterSize)
 						{
-							recs.Add(new Record { MarkCust = mark.MarkCust });
+							rMe.Add(new Record { MarkCust = mark.MarkCust });
 						}
 
-						Records = recs;
+						Records = rMe;
 					}
 				}
 			}

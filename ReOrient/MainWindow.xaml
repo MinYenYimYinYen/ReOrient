@@ -20,19 +20,23 @@
             <StackPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Zip Code:" />
-                    <TextBox  Width="65" />                    
+                    <TextBox  Width="65" Text="{Binding Path=ZipCode}" />                    
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Size Lo" />
-                    <TextBox  Width="65" />
+                    <TextBox  Width="65" Text="{Binding Path=SizeLo}" />
                     <Label Content="Size Hi" />
-                    <TextBox  Width="65" />
+                    <TextBox  Width="65" Text="{Binding Path=SizeHi}" />
                 </StackPanel>
             </StackPanel>
             <m:Map Grid.Column="1"
                    CredentialsProvider="Atu4AQp2CNh0a2jeTlH3PwPWtCV-DyjxvTL2f4k2COQmV6407he4vlP2aJw9fZju"
                    ZoomLevel="16"
-                   Center="{Binding Path=MapCenter}"></m:Map>
+                   Center="{Binding Path=MapCenter}">
+                <m:MapItemsControl ItemsSource="{Binding Path=Records}">
+                    
+                </m:MapItemsControl>
+            </m:Map>
         </Grid>
 
     </Grid>
