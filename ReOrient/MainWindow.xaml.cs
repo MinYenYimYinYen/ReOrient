@@ -1,4 +1,6 @@
-﻿using ReOrient.Models;
+﻿using Microsoft.Maps.MapControl.WPF;
+using ReOrient.Commands;
+using ReOrient.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,10 +26,13 @@ namespace ReOrient
 	public partial class MainWindow : Window
 	{
 		public MainWindow()
+			
+
+
 		{
 			InitializeComponent();
-
 		}
+		public static SA.SADBContext sa = new SA.SADBContext();
 		public string MapCenter
 		{
 			get
@@ -35,7 +40,7 @@ namespace ReOrient
 				return "45.26653,-93.77274";
 			}
 		}
-		public string MapMode { get; set; }
+		//public string MapMode { get; set; }
 
 		private ObservableCollection<Record> records;
 		public ObservableCollection<Record> Records
@@ -105,8 +110,7 @@ namespace ReOrient
 			{
 				if (zipCode.Length == 5)
 				{
-					using (var sa = new SA.SADBContext())
-					{
+
 						var recs = new ObservableCollection<Record>();
 
 						//Filter By Zip
@@ -128,9 +132,12 @@ namespace ReOrient
 						{
 							this.Dispatcher.Invoke(()=> Records.Add(new Record { MarkCust = mark.MarkCust }));							 
 						}
-					}
 				}
 			}
 		}
+
+		
+
+
 	}
 }
