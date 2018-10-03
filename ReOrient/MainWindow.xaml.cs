@@ -26,7 +26,7 @@ namespace ReOrient
 	public partial class MainWindow : Window
 	{
 		public MainWindow()
-			
+
 
 
 		{
@@ -111,39 +111,61 @@ namespace ReOrient
 				if (zipCode.Length == 5)
 				{
 
-						var recs = new ObservableCollection<Record>();
+					var recs = new ObservableCollection<Record>();
 
-						//Filter By Zip
-						foreach (var mark in sa.markcusts
-							.Where(m => m.zip.Trim().Substring(0, 5) == zipCode))
+					//Filter By Zip
+					foreach (var mark in sa.markcusts
+						.Where(m => m.zip.Trim().Substring(0, 5) == zipCode))
 
-						{
-							recs.Add(new Record { MarkCust = mark });
-						}
+					{
+						recs.Add(new Record { MarkCust = mark });
+					}
 
-						//Filter by Size
-						var rMe = new ObservableCollection<Record>();
-						var filterSize = recs.Where(r => r.Size >= SizeLo)
-							.Where(r => r.Size <= SizeHi).ToList();
+					//Filter by Size
+					//var rMe = new ObservableCollection<Record>();
+					var filterSize = recs.Where(r => r.Size >= SizeLo)
+						.Where(r => r.Size <= SizeHi).ToList();
 
-						this.Dispatcher.Invoke(() => Records.Clear());
+					//Filter IsDupes
+					//int IsDupe = 685;
+					//var custFlag = MainWindow.sa.custflags.Where(cf => cf.flag == IsDupe);
 
-						foreach (var mark in filterSize)
-						{
-							this.Dispatcher.Invoke(()=> Records.Add(new Record { MarkCust = mark.MarkCust }));							 
-						}
+
+					//Add the records
+					this.Dispatcher.Invoke(() => Records.Clear());
+					foreach (var mark in filterSize)
+					{
+						this.Dispatcher.Invoke(() => Records.Add(new Record { MarkCust = mark.MarkCust }));
+					}
 				}
 			}
 		}
 
 		private void Disappear(object sender, RoutedEventArgs e)
 		{
-			var btn = (Button)sender;
+			var btn = (DependencyObject)sender;
 			var x = VisualTreeHelper.GetParent(btn);
 			var y = VisualTreeHelper.GetParent(x);
 			var z = VisualTreeHelper.GetParent(y);
-			Pushpin a = (Pushpin)VisualTreeHelper.GetParent(z);
-			a.Visibility = Visibility.Collapsed;
+			var a = VisualTreeHelper.GetParent(z);
+			var b = VisualTreeHelper.GetParent(a);
+
+			Pushpin c = (Pushpin)VisualTreeHelper.GetParent(b);
+			c.Visibility = Visibility.Collapsed;
+		}
+
+		private void btn_Address_Click(object sender, RoutedEventArgs e)
+		{
+			Button button = (Button)sender;
+			try
+			{
+				Clipboard.SetText(button.Content.ToString());
+			}
+			catch (Exception)
+			{
+
+			}
+
 		}
 
 

@@ -15,11 +15,11 @@
     </Window.Resources>
     <Grid>
         <Grid DataContext="{Binding ElementName=Main}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Zip Code:" />
                     <TextBox  Width="65" Text="{Binding Path=ZipCode}" />
@@ -31,14 +31,14 @@
                     <TextBox  Width="65" Text="{Binding Path=SizeHi}" />
                 </StackPanel>
             </StackPanel>
-            <m:Map Grid.Column="1" Name="FuckYea" Mode="AerialWithLabels"
+            <m:Map Grid.Row="1" Name="FuckYea" Mode="AerialWithLabels"
                    CredentialsProvider="Atu4AQp2CNh0a2jeTlH3PwPWtCV-DyjxvTL2f4k2COQmV6407he4vlP2aJw9fZju"
                    ZoomLevel="16"
                    Center="{Binding Path=MapCenter}">
                 <m:Map.Resources>
                     <ControlTemplate x:Key="PushPinTemplate" TargetType="{x:Type m:Pushpin}">
                         <Grid x:Name="grd_PushPin" HorizontalAlignment="Left">
-                            <Ellipse Name="elps_Pin" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="4"
+                            <Rectangle Name="elps_Pin" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="4"
                                      Height="{Binding Height, ElementName=grd_PushPin}" Width="{Binding Width, ElementName=grd_PushPin}"/>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
                                                Height="{Binding Height, ElementName=grd_PushPin}" Width="{Binding Width, ElementName=grd_PushPin}"
@@ -50,21 +50,58 @@
                     <m:MapItemsControl.ItemTemplate>
                         <DataTemplate>
                             <m:Pushpin Location="{Binding Path=Location}"
-                                       Template="{StaticResource PushPinTemplate}" Opacity=".5"
-                                       Width="Auto" Height="Auto" Foreground="Blue" >
+                                       Template="{StaticResource PushPinTemplate}" Opacity="{Binding ElementName=OpacSlider, Path=Value}"
+                                       Width="Auto" Height="Auto" Background="LightGray">
                                 <m:Pushpin.Content>
-                                    <StackPanel>
-                                        <Label Content="{Binding Path=MarkCust.cust_no}"/>
-                                        <Button Name="btn_Commercial" Content="777.01" Command="{Binding Path=Size77701}" CommandParameter="{Binding}"
-                                                Click="Disappear" />
-                                        <Button Name="btn_UnmeasurableSMall" Content="777.99" Command="{Binding Path=Size77799}" CommandParameter="{Binding}"
-                                                Click="Disappear" />
-                                        <Button Name="btn_Over24" Content="99" Command="{Binding Path=Size99}" CommandParameter="{Binding}"
-                                                Click="Disappear" />
-                                        <Button Name="btn_0" Content="0.00" Command="{Binding Path=Size0}" CommandParameter="{Binding}"
-                                                Click="Disappear" />
-                                        <Button Name="btn_NotFound" Content="777.07" Command="{Binding Path=Size77707}" CommandParameter="{Binding}"
-                                                Click="Disappear" />
+                                    <StackPanel>                                        
+                                        <Button Name="btn_Address"  Content="{Binding Path=Address}" Click="btn_Address_Click"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel>
+                                                <Button Name="btn_Commercial" Content="777.01" Command="{Binding Path=Size77701}" CommandParameter="{Binding}"
+                                                Click="Disappear" MaxWidth="75"/>
+                                                <Button Name="btn_UnmeasurableSMall" Content="777.99" Command="{Binding Path=Size77799}" CommandParameter="{Binding}"
+                                                Click="Disappear" MaxWidth="75"/>
+                                                <Button Name="btn_Over24" Content="99" Command="{Binding Path=Size99}" CommandParameter="{Binding}"
+                                                Click="Disappear" MaxWidth="75"/>                                       
+                                                <TextBox Name="txt_Size" Width="20" Text="{Binding Path=NewSize}" LostFocus="Disappear" />                                    
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <Button Name="btn_0" Content="0.00" Command="{Binding Path=Size0}" CommandParameter="{Binding}"
+                                                Click="Disappear" MaxWidth="75"/>
+                                                <Button Name="btn_NotFound" Content="777.07" Command="{Binding Path=Size77707}" CommandParameter="{Binding}"
+                                                Click="Disappear" MaxWidth="75"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel>
+                                                        <ComboBox Name="cbox_PreDir">
+                                                            <ComboBoxItem Height="25" Content="  "/>
+                                                            <ComboBoxItem Content="N "/>
+                                                            <ComboBoxItem Content="S "/>
+                                                            <ComboBoxItem Content="E "/>
+                                                            <ComboBoxItem Content="W "/>
+                                                            <ComboBoxItem Content="NE"/>
+                                                            <ComboBoxItem Content="NW"/>
+                                                            <ComboBoxItem Content="SE"/>
+                                                            <ComboBoxItem Content="SW"/>
+                                                        </ComboBox>
+                                                        <Button Content="Pre" Command="{Binding Path=AssignPredir}" CommandParameter="{Binding}"/>
+                                                    </StackPanel>
+                                                    <StackPanel>                                                       
+                                                        <ComboBox Name="cbox_PostDir" SelectedValue="{Binding Path=PostDir}">
+                                                            <ComboBoxItem Height="25" Content="  "/>
+                                                            <ComboBoxItem Content="N "/>
+                                                            <ComboBoxItem Content="S "/>
+                                                            <ComboBoxItem Content="E "/>
+                                                            <ComboBoxItem Content="W "/>
+                                                            <ComboBoxItem Content="NE"/>
+                                                            <ComboBoxItem Content="NW"/>
+                                                            <ComboBoxItem Content="SE"/>
+                                                            <ComboBoxItem Content="SW"/>                                                            
+                                                        </ComboBox>
+                                                        <Button Content="Post" Command="{Binding Path=AssignPostdir}" CommandParameter="{Binding}"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
                                     </StackPanel>
                                 </m:Pushpin.Content>
                             </m:Pushpin>
@@ -72,16 +109,17 @@
                     </m:MapItemsControl.ItemTemplate>
                 </m:MapItemsControl>
                 <m:MapLayer>
-                    <Grid>
-                        <WrapPanel>
-                            <!--<Button Click="MapModeRoad"/>
-                            <Button Click="MapModeAerial"/>-->
-                            
-                        </WrapPanel>
-                    </Grid>
+                    <DockPanel Height="25" VerticalAlignment="Top">
+                        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Left">
+
+                            <Slider DockPanel.Dock="Left" Width="100" Name="OpacSlider" Minimum="0" Maximum="1" Value=".5"/>
+
+                        </DockPanel>
+                        
+                    </DockPanel>
+                    
                 </m:MapLayer>
             </m:Map>
         </Grid>
-
     </Grid>
 </Window>

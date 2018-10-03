@@ -19,7 +19,7 @@ namespace ReOrient.Models
 			string geocodeRequest = "http://dev.virtualearth.net/REST/v1/Locations/" + record.Address + ", " + record.MarkCust.zip.Trim().Substring(0,5) + "?o=xml&key=" + "Atu4AQp2CNh0a2jeTlH3PwPWtCV-DyjxvTL2f4k2COQmV6407he4vlP2aJw9fZju";
 			XmlDocument geocodeResponse = GetXmlResponse(geocodeRequest);
 			if (geocodeResponse == null) return null;
-			geocodeResponse.Save("tempXML.xml");
+		//	geocodeResponse.Save("tempXML.xml");
 
 			Confidence confidenceResult = Confidence.High;
 			MatchCode matchCodeResult = MatchCode.Good;
@@ -81,6 +81,7 @@ namespace ReOrient.Models
 
 			return null;
 		}
+
 		//public static Address getBingAddress(Customer cust)
 		//{
 		//	Address fuckThis = new Address();
