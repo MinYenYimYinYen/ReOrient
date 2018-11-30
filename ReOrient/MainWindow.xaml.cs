@@ -98,6 +98,17 @@ namespace ReOrient
 				LoadRecordsOnThread();
 			}
 		}
+
+
+		private static bool hennepinMode = false;
+		public static bool HennepinMode
+		{
+			get { return hennepinMode; }
+			set
+			{
+				hennepinMode = value ;
+			}
+		}
 		private void LoadRecordsOnThread()
 		{
 			Thread t = new Thread(new ThreadStart(this.LoadRecords));
@@ -124,7 +135,8 @@ namespace ReOrient
 					//Filter by Size
 					//var rMe = new ObservableCollection<Record>();
 					var filterSize = recs.Where(r => r.Size >= SizeLo)
-						.Where(r => r.Size <= SizeHi).ToList();
+						.Where(r => r.Size <= SizeHi).ToList()
+						.Take(500);
 
 					//Filter IsDupes
 					//int IsDupe = 685;
@@ -157,9 +169,12 @@ namespace ReOrient
 		private void btn_Address_Click(object sender, RoutedEventArgs e)
 		{
 			Button button = (Button)sender;
+			Record record = (Record)button.DataContext;
 			try
 			{
-				Clipboard.SetText(button.Content.ToString());
+				if(HennepinMode)				Clipboard.SetText(record.HennepinModeCopy);
+				else Clipboard.SetText(record.Address);
+				//Clipboard.SetText(button.Content.ToString());
 			}
 			catch (Exception)
 			{

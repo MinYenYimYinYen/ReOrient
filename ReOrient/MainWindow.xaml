@@ -23,6 +23,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Zip Code:" />
                     <TextBox  Width="65" Text="{Binding Path=ZipCode}" />
+                    <CheckBox Content="Hennepin Mode" IsChecked="{Binding HennepinMode}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Size Lo" />

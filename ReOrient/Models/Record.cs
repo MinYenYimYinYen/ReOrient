@@ -145,6 +145,41 @@ namespace ReOrient.Models
 				}
 
 				return str.ToString();
+
+
+			}
+		}
+
+		public string HennepinModeCopy
+		{
+			get
+			{
+				var mark = MarkCust;
+				StringBuilder str = new StringBuilder();
+
+				if (!string.IsNullOrWhiteSpace(mark.streetno))
+				{
+					str.Append(mark.streetno.Trim());
+					//str.Append(' ');
+				}
+
+			/*	if (!string.IsNullOrWhiteSpace(mark.predir))
+				{
+					str.Append(mark.predir.Trim());
+					str.Append(' ');
+				}
+				str.Append(mark.streetnm);
+				str.Append(' ');
+				if (mark.suffix != null) str.Append(mark.suffix.Trim());
+
+
+				if (!string.IsNullOrWhiteSpace(mark.postdir))
+				{
+					str.Append(' ');
+					str.Append(mark.postdir.Trim());
+				}*/
+
+				return str.ToString();
 			}
 		}
 
