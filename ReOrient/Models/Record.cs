@@ -114,12 +114,12 @@ namespace ReOrient.Models
 		}
 		#endregion
 
-		public MarkCust MarkCust { get; set; }
+		public IMarkCust MarkCust { get; set; }
 		public string Address
 		{
 			get
 			{
-				MarkCust mark = MarkCust;
+				IMarkCust mark = MarkCust;
 				StringBuilder str = new StringBuilder();
 
 				if (!string.IsNullOrWhiteSpace(mark.StreetNo))
@@ -156,7 +156,7 @@ namespace ReOrient.Models
 		{
 			get
 			{
-				MarkCust mark = MarkCust;
+				IMarkCust mark = MarkCust;
 				StringBuilder str = new StringBuilder();
 
 				if (!string.IsNullOrWhiteSpace(mark.StreetNo))

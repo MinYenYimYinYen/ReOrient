@@ -4,6 +4,7 @@ using ReOrient.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -33,7 +34,13 @@ namespace ReOrient
 		public string MapCenter => "45.26653,-93.77274";
 		//public string MapMode { get; set; }
 
-		public IEnumerable<MarkCust> MarkCusts { get; set; }
+		public IEnumerable<IMarkCust> MarkCusts
+		{
+			get
+			{
+				return CSVControl.LoadMarkCustsFromCSV(CSVPath);
+			}
+		}
 
 
 		private ObservableCollection<Record> records;
@@ -52,6 +59,20 @@ namespace ReOrient
 			{
 
 				records = value;
+			}
+		}
+
+		private string _cSVPath;
+		public string CSVPath
+		{
+			get
+			{
+				return _cSVPath;
+			}
+			set
+			{
+				_cSVPath = value;
+				LoadRecordsOnThread();
 			}
 		}
 
@@ -99,6 +120,7 @@ namespace ReOrient
 
 
 		private static bool hennepinMode = false;
+
 		public static bool HennepinMode
 		{
 			get { return hennepinMode; }
@@ -115,7 +137,7 @@ namespace ReOrient
 
 		private void LoadRecords()
 		{
-			if (SizeLo != null && SizeHi != null)
+			if (SizeLo != null && SizeHi != null && File.Exists(CSVPath))
 			{
 				if (zipCode.Length == 5)
 				{
@@ -123,7 +145,7 @@ namespace ReOrient
 					ObservableCollection<Record> recs = new ObservableCollection<Record>();
 
 					//Filter By Zip
-					foreach (var mark in MarkCusts
+					foreach (IMarkCust mark in MarkCusts
 						.Where(m => m.Zip.Trim().Substring(0, 5) == zipCode))
 
 					{
@@ -132,7 +154,7 @@ namespace ReOrient
 
 					//Filter by Size
 					//var rMe = new ObservableCollection<Record>();
-					var filterSize = recs.Where(r => r.Size >= SizeLo)
+					IEnumerable<Record> filterSize = recs.Where(r => r.Size >= SizeLo)
 						.Where(r => r.Size <= SizeHi).ToList()
 						.Take(500);
 
@@ -143,7 +165,7 @@ namespace ReOrient
 
 					//Add the records
 					Dispatcher.Invoke(() => Records.Clear());
-					foreach (var mark in filterSize)
+					foreach (Record mark in filterSize)
 					{
 						Dispatcher.Invoke(() => Records.Add(new Record { MarkCust = mark.MarkCust }));
 					}

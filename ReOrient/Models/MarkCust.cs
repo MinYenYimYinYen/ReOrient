@@ -6,18 +6,24 @@ using System.Threading.Tasks;
 
 namespace ReOrient.Models
 {
-	public interface MarkCust
+	public class MarkCust : IMarkCust
 	{
-		string StreetNo { get; }
-		string PreDir { get; set; }
-		string StreetNm { get; }
-		string Suffix { get; }
-		string PostDir { get; set; }
-		string Zip { get; }
+		public string StreetNo { get; set; }
 
-		double Latitude { get; set; }
-		double Longitude { get; set; }
+		public string PreDir { get; set; }
 
-		double? Size { get; set; }
+		public string StreetNm  { get; set; }
+
+		public string Suffix { get; set; }
+
+		public string PostDir { get; set; }
+
+		public string Zip { get; set; }
+
+		public double Latitude { get; set; }
+
+		public double Longitude { get; set; }
+
+		public double? Size { get; set; }
 	}
 }

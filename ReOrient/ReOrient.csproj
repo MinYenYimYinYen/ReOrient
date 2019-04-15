@@ -68,6 +68,8 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Models\BingControl.cs" />
+    <Compile Include="Models\CSVControl.cs" />
+    <Compile Include="Models\IMarkCust.cs" />
     <Compile Include="Models\MarkCust.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Threading\TextArgs.cs" />
