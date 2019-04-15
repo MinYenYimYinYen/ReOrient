@@ -26,28 +26,26 @@ namespace ReOrient
 	public partial class MainWindow : Window
 	{
 		public MainWindow()
-
-
-
 		{
 			InitializeComponent();
 		}
-		public static SA.SADBContext sa = new SA.SADBContext();
-		public string MapCenter
-		{
-			get
-			{
-				return "45.26653,-93.77274";
-			}
-		}
+
+		public string MapCenter => "45.26653,-93.77274";
 		//public string MapMode { get; set; }
+
+		public IEnumerable<MarkCust> MarkCusts { get; set; }
+
 
 		private ObservableCollection<Record> records;
 		public ObservableCollection<Record> Records
 		{
 			get
 			{
-				if (records == null) records = new ObservableCollection<Record>();
+				if (records == null)
+				{
+					records = new ObservableCollection<Record>();
+				}
+
 				return records;
 			}
 			set
@@ -57,8 +55,8 @@ namespace ReOrient
 			}
 		}
 
-		private decimal? sizeLo;
-		public decimal? SizeLo
+		private double? sizeLo;
+		public double? SizeLo
 		{
 			get
 			{
@@ -71,8 +69,8 @@ namespace ReOrient
 			}
 		}
 
-		private decimal? sizeHi;
-		public decimal? SizeHi
+		private double? sizeHi;
+		public double? SizeHi
 		{
 			get
 			{
@@ -106,12 +104,12 @@ namespace ReOrient
 			get { return hennepinMode; }
 			set
 			{
-				hennepinMode = value ;
+				hennepinMode = value;
 			}
 		}
 		private void LoadRecordsOnThread()
 		{
-			Thread t = new Thread(new ThreadStart(this.LoadRecords));
+			Thread t = new Thread(new ThreadStart(LoadRecords));
 			t.Start();
 		}
 
@@ -122,11 +120,11 @@ namespace ReOrient
 				if (zipCode.Length == 5)
 				{
 
-					var recs = new ObservableCollection<Record>();
+					ObservableCollection<Record> recs = new ObservableCollection<Record>();
 
 					//Filter By Zip
-					foreach (var mark in sa.markcusts
-						.Where(m => m.zip.Trim().Substring(0, 5) == zipCode))
+					foreach (var mark in MarkCusts
+						.Where(m => m.Zip.Trim().Substring(0, 5) == zipCode))
 
 					{
 						recs.Add(new Record { MarkCust = mark });
@@ -144,10 +142,10 @@ namespace ReOrient
 
 
 					//Add the records
-					this.Dispatcher.Invoke(() => Records.Clear());
+					Dispatcher.Invoke(() => Records.Clear());
 					foreach (var mark in filterSize)
 					{
-						this.Dispatcher.Invoke(() => Records.Add(new Record { MarkCust = mark.MarkCust }));
+						Dispatcher.Invoke(() => Records.Add(new Record { MarkCust = mark.MarkCust }));
 					}
 				}
 			}
@@ -155,12 +153,12 @@ namespace ReOrient
 
 		private void Disappear(object sender, RoutedEventArgs e)
 		{
-			var btn = (DependencyObject)sender;
-			var x = VisualTreeHelper.GetParent(btn);
-			var y = VisualTreeHelper.GetParent(x);
-			var z = VisualTreeHelper.GetParent(y);
-			var a = VisualTreeHelper.GetParent(z);
-			var b = VisualTreeHelper.GetParent(a);
+			DependencyObject btn = (DependencyObject)sender;
+			DependencyObject x = VisualTreeHelper.GetParent(btn);
+			DependencyObject y = VisualTreeHelper.GetParent(x);
+			DependencyObject z = VisualTreeHelper.GetParent(y);
+			DependencyObject a = VisualTreeHelper.GetParent(z);
+			DependencyObject b = VisualTreeHelper.GetParent(a);
 
 			Pushpin c = (Pushpin)VisualTreeHelper.GetParent(b);
 			c.Visibility = Visibility.Collapsed;
@@ -172,8 +170,14 @@ namespace ReOrient
 			Record record = (Record)button.DataContext;
 			try
 			{
-				if(HennepinMode)				Clipboard.SetText(record.HennepinModeCopy);
-				else Clipboard.SetText(record.Address);
+				if (HennepinMode)
+				{
+					Clipboard.SetText(record.HennepinModeCopy);
+				}
+				else
+				{
+					Clipboard.SetText(record.Address);
+				}
 				//Clipboard.SetText(button.Content.ToString());
 			}
 			catch (Exception)

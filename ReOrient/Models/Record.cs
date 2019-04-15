@@ -36,10 +36,10 @@ namespace ReOrient.Models
 
 		private void _AssignPredir(object RecordObj)
 		{
-			var rec = (Record)RecordObj;
-			rec.MarkCust.postdir = null;
-			rec.MarkCust.predir = rec.PreDir;
-			MainWindow.sa.SaveChanges();
+			Record rec = (Record)RecordObj;
+			rec.MarkCust.PostDir = null;
+			rec.MarkCust.PreDir = rec.PreDir;
+			
 		}
 		private bool _AssignPredirExec(object RecordObj)
 		{
@@ -49,10 +49,9 @@ namespace ReOrient.Models
 
 		private void _AssignPostDir(object RecordObj)
 		{
-			var rec = (Record)RecordObj;
-			rec.MarkCust.predir = null;
-			rec.MarkCust.postdir = rec.PostDir;
-			MainWindow.sa.SaveChanges();
+			Record rec = (Record)RecordObj;
+			rec.MarkCust.PreDir = null;
+			rec.MarkCust.PostDir = rec.PostDir;
 		}
 		private bool _AssignPostdirExec(object RecordObj)
 		{
@@ -62,51 +61,52 @@ namespace ReOrient.Models
 
 		private void _Size77701(object RecordObj)
 		{
-			var rec = (Record)RecordObj;
-			rec.MarkCust.size = (decimal)777.01;
-			MainWindow.sa.SaveChanges();
-
+			Record rec = (Record)RecordObj;
+			rec.MarkCust.Size = 777.01;
 		}
 		private bool _Size77701Exec(object RecordObj)
 		{
 			return true;
 		}
+
+
 		private void _Size77799(object RecordObj)
 		{
-			var rec = (Record)RecordObj;
-			rec.MarkCust.size = (decimal)777.99;
-			MainWindow.sa.SaveChanges();
+			Record rec = (Record)RecordObj;
+			rec.MarkCust.Size = 777.99;
 		}
 		private bool _Size77799Exec(object RecordObj)
 		{
 			return true;
 		}
+
+
 		private void _Size99(object RecordObj)
 		{
-			var rec = (Record)RecordObj;
-			rec.MarkCust.size = (decimal)99;
-			MainWindow.sa.SaveChanges();
+			Record rec = (Record)RecordObj;
+			rec.MarkCust.Size = 99;
 		}
 		private bool _Size99Exec(object RecordObj)
 		{
 			return true;
 		}
 
+
 		private void _Size0(object RecordObj)
 		{
-			var rec = (Record)RecordObj;
-			rec.MarkCust.size = (decimal)0;
-			MainWindow.sa.SaveChanges();
+			Record rec = (Record)RecordObj;
+			rec.MarkCust.Size = 0;
 		}
 		private bool _Size0Exec(object RecordObj)
 		{
 			return true;
 		}
+
+
 		private void _Size77707(object RecordObj)
 		{
-			var rec = (Record)RecordObj;
-			rec.MarkCust.size = (decimal)777.07;
-			MainWindow.sa.SaveChanges();
+			Record rec = (Record)RecordObj;
+			rec.MarkCust.Size = 777.07;
 		}
 		private bool _Size77707Exec(object RecordObj)
 		{
@@ -114,34 +114,36 @@ namespace ReOrient.Models
 		}
 		#endregion
 
-		public SA.markcust MarkCust { get; set; }
+		public MarkCust MarkCust { get; set; }
 		public string Address
 		{
 			get
 			{
-				var mark = MarkCust;
+				MarkCust mark = MarkCust;
 				StringBuilder str = new StringBuilder();
 
-				if (!string.IsNullOrWhiteSpace(mark.streetno))
+				if (!string.IsNullOrWhiteSpace(mark.StreetNo))
 				{
-					str.Append(mark.streetno.Trim());
+					str.Append(mark.StreetNo.Trim());
 					str.Append(' ');
 				}
 
-				if (!string.IsNullOrWhiteSpace(mark.predir))
+				if (!string.IsNullOrWhiteSpace(mark.PreDir))
 				{
-					str.Append(mark.predir.Trim());
+					str.Append(mark.PreDir.Trim());
 					str.Append(' ');
 				}
-				str.Append(mark.streetnm);
+				str.Append(mark.StreetNm);
 				str.Append(' ');
-				if (mark.suffix != null) str.Append(mark.suffix.Trim());
+				if (mark.Suffix != null)
+				{
+					str.Append(mark.Suffix.Trim());
+				}
 
-
-				if (!string.IsNullOrWhiteSpace(mark.postdir))
+				if (!string.IsNullOrWhiteSpace(mark.PostDir))
 				{
 					str.Append(' ');
-					str.Append(mark.postdir.Trim());
+					str.Append(mark.PostDir.Trim());
 				}
 
 				return str.ToString();
@@ -154,30 +156,30 @@ namespace ReOrient.Models
 		{
 			get
 			{
-				var mark = MarkCust;
+				MarkCust mark = MarkCust;
 				StringBuilder str = new StringBuilder();
 
-				if (!string.IsNullOrWhiteSpace(mark.streetno))
+				if (!string.IsNullOrWhiteSpace(mark.StreetNo))
 				{
-					str.Append(mark.streetno.Trim());
+					str.Append(mark.StreetNo.Trim());
 					//str.Append(' ');
 				}
 
-			/*	if (!string.IsNullOrWhiteSpace(mark.predir))
-				{
-					str.Append(mark.predir.Trim());
+				/*	if (!string.IsNullOrWhiteSpace(mark.predir))
+					{
+						str.Append(mark.predir.Trim());
+						str.Append(' ');
+					}
+					str.Append(mark.streetnm);
 					str.Append(' ');
-				}
-				str.Append(mark.streetnm);
-				str.Append(' ');
-				if (mark.suffix != null) str.Append(mark.suffix.Trim());
+					if (mark.suffix != null) str.Append(mark.suffix.Trim());
 
 
-				if (!string.IsNullOrWhiteSpace(mark.postdir))
-				{
-					str.Append(' ');
-					str.Append(mark.postdir.Trim());
-				}*/
+					if (!string.IsNullOrWhiteSpace(mark.postdir))
+					{
+						str.Append(' ');
+						str.Append(mark.postdir.Trim());
+					}*/
 
 				return str.ToString();
 			}
@@ -187,19 +189,18 @@ namespace ReOrient.Models
 		{
 			get
 			{
-				Location location = BingControl.getBingLocation(this, BingControl.MatchCode.Good, BingControl.Confidence.High);
+				Location location = BingControl.getBingLocation(Address, MarkCust.Zip, BingControl.MatchCode.Good, BingControl.Confidence.High);
 				if (location != null)
 				{
-					MarkCust.latitude = (decimal)location.Latitude;
-					MarkCust.longitude = (decimal)location.Longitude;
-					MainWindow.sa.SaveChanges();
+					MarkCust.Latitude = location.Latitude;
+					MarkCust.Longitude = location.Longitude;
 				}
 
 				return location;
 			}
 		}
 
-		public decimal Size => (decimal)(MarkCust.size == null ? 0 : MarkCust.size);
+		public double Size => (double)(MarkCust.Size == null ? 0 : MarkCust.Size);
 
 
 		private string preDir;
@@ -220,22 +221,21 @@ namespace ReOrient.Models
 			set
 			{
 				string str = value.ToString();
-				var len = str.Length;
+				int len = str.Length;
 
 				postDir = str.Substring(len - 2, 2).Trim();
 
 			}
 		}
 
-		private decimal newSize;
-		public decimal NewSize
+		private double newSize;
+		public double NewSize
 		{
 			get { return newSize; }
 			set
 			{
 				newSize = value;
-				MarkCust.size = newSize;
-				MainWindow.sa.SaveChanges();
+				MarkCust.Size = newSize;
 			}
 		}
 
