@@ -34,13 +34,7 @@ namespace ReOrient
 		public string MapCenter => "45.26653,-93.77274";
 		//public string MapMode { get; set; }
 
-		public IEnumerable<IMarkCust> MarkCusts
-		{
-			get
-			{
-				return CSVControl.LoadMarkCustsFromCSV(CSVPath);
-			}
-		}
+		public IEnumerable<IMarkCust> MarkCusts => new CSVControl().GetMarkCustsFromCSV(CSVPath);
 
 
 		private ObservableCollection<Record> records;
@@ -62,7 +56,7 @@ namespace ReOrient
 			}
 		}
 
-		private string _cSVPath;
+		private string _cSVPath = @"D:\SharePoint\GM Lawncare Inc\Boss Group - Documents\Big Data\Post Apocalypse\BLOCKLEADTEST.CSV";
 		public string CSVPath
 		{
 			get
@@ -137,9 +131,9 @@ namespace ReOrient
 
 		private void LoadRecords()
 		{
-			if (SizeLo != null && SizeHi != null && File.Exists(CSVPath))
+			if (ZipCode !=null &&  SizeLo != null && SizeHi != null && File.Exists(CSVPath))
 			{
-				if (zipCode.Length == 5)
+				if (ZipCode.Length == 5)
 				{
 
 					ObservableCollection<Record> recs = new ObservableCollection<Record>();

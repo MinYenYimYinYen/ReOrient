@@ -68,9 +68,10 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Models\BingControl.cs" />
-    <Compile Include="Models\CSVControl.cs" />
-    <Compile Include="Models\IMarkCust.cs" />
-    <Compile Include="Models\MarkCust.cs" />
+    <Compile Include="Models\_CSVControl\CSVControl.cs" />
+    <Compile Include="Models\_CSVControl\ICSVControl.cs" />
+    <Compile Include="Models\_MarkCust\IMarkCust.cs" />
+    <Compile Include="Models\_MarkCust\MarkCust.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Threading\TextArgs.cs" />
     <Page Include="MainWindow.xaml">
