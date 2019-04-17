@@ -26,6 +26,10 @@ namespace ReOrient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		[Obsolete]
+		private string zipCode;
+		private int _loadCount = 10;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -98,19 +102,31 @@ namespace ReOrient
 			}
 		}
 
-		private string zipCode;
-		public string ZipCode
+		public int LoadCount
 		{
 			get
 			{
-				return zipCode;
+				return _loadCount;
 			}
 			set
 			{
-				zipCode = value;
+				try
+				{
+
+					_loadCount = value;
+					if (_loadCount < 1) LoadCount = 1;
+				}
+				catch (Exception)
+				{
+					_loadCount = 10;
+					throw;
+				}
+
 				LoadRecordsOnThread();
 			}
 		}
+
+
 
 
 		private static bool hennepinMode = false;
@@ -131,38 +147,32 @@ namespace ReOrient
 
 		private void LoadRecords()
 		{
-			if (ZipCode !=null &&  SizeLo != null && SizeHi != null && File.Exists(CSVPath))
+			if (SizeLo != null && SizeHi != null && File.Exists(CSVPath))
 			{
-				if (ZipCode.Length == 5)
+				ObservableCollection<Record> recs = new ObservableCollection<Record>();
+
+				//Filter By Zip
+				foreach (IMarkCust mark in MarkCusts)
 				{
+					recs.Add(new Record { MarkCust = mark });
+				}
 
-					ObservableCollection<Record> recs = new ObservableCollection<Record>();
+				//Filter by Size
+				//var rMe = new ObservableCollection<Record>();
+				IEnumerable<Record> filterSize = recs.Where(r => r.Size >= SizeLo)
+					.Where(r => r.Size <= SizeHi).ToList()
+					.Take(LoadCount);
 
-					//Filter By Zip
-					foreach (IMarkCust mark in MarkCusts
-						.Where(m => m.Zip.Trim().Substring(0, 5) == zipCode))
-
-					{
-						recs.Add(new Record { MarkCust = mark });
-					}
-
-					//Filter by Size
-					//var rMe = new ObservableCollection<Record>();
-					IEnumerable<Record> filterSize = recs.Where(r => r.Size >= SizeLo)
-						.Where(r => r.Size <= SizeHi).ToList()
-						.Take(500);
-
-					//Filter IsDupes
-					//int IsDupe = 685;
-					//var custFlag = MainWindow.sa.custflags.Where(cf => cf.flag == IsDupe);
+				//Filter IsDupes
+				//int IsDupe = 685;
+				//var custFlag = MainWindow.sa.custflags.Where(cf => cf.flag == IsDupe);
 
 
-					//Add the records
-					Dispatcher.Invoke(() => Records.Clear());
-					foreach (Record mark in filterSize)
-					{
-						Dispatcher.Invoke(() => Records.Add(new Record { MarkCust = mark.MarkCust }));
-					}
+				//Add the records
+				Dispatcher.Invoke(() => Records.Clear());
+				foreach (Record mark in filterSize)
+				{
+					Dispatcher.Invoke(() => Records.Add(new Record { MarkCust = mark.MarkCust }));
 				}
 			}
 		}
@@ -204,5 +214,19 @@ namespace ReOrient
 		}
 
 
+
+		[Obsolete]
+		public string ZipCode
+		{
+			get
+			{
+				return zipCode;
+			}
+			set
+			{
+				zipCode = value;
+				LoadRecordsOnThread();
+			}
+		}
 	}
 }

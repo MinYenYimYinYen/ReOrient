@@ -8,6 +8,7 @@ namespace ReOrient.Models
 {
 	public interface IMarkCust
 	{
+		int Cust_No { get; set; }
 		string StreetNo { get; }
 		string PreDir { get; set; }
 		string StreetNm { get; }
@@ -19,5 +20,11 @@ namespace ReOrient.Models
 		double Longitude { get; set; }
 
 		double? Size { get; set; }
+
+		string FilePath { get; set; }
+		int CSVRowIndex { get; set; }
+		DateTime LastChange { get; set; }
+
+		void WriteChanges();
 	}
 }

@@ -26,13 +26,15 @@
 				<TextBox  Width="65" Text="{Binding Path=SizeLo}" />
 				<Label Content="Size Hi" />
 				<TextBox  Width="65" Text="{Binding Path=SizeHi}" />
+				<Label Content="Load Count" />
+				<TextBox  Width="65" Text="{Binding Path=LoadCount}" />
 			</StackPanel>
 		</StackPanel>
 		<StackPanel DockPanel.Dock="Left">
 			<StackPanel>
 				<CheckBox Content="Hennepin Mode" IsChecked="{Binding HennepinMode}" />
-				<Label Content="Zip Code:" />
-				<TextBox  Width="65" Text="{Binding Path=ZipCode}" />
+				<!--<Label Content="Zip Code:" />
+				<TextBox  Width="65" Text="{Binding Path=ZipCode}" />-->
 
 			</StackPanel>
 

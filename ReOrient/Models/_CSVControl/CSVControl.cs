@@ -14,47 +14,44 @@ namespace ReOrient.Models
 		{
 			ObservableCollection<MarkCust> markCusts = new ObservableCollection<MarkCust>();
 
-			FileStream fileStream = new FileStream(csvPath, FileMode.Open);
-			StreamReader streamReader = new StreamReader(fileStream);
+			string[] lines = GetCSVLines(csvPath);
 
-			string wholeText = streamReader.ReadToEnd();
-			wholeText = wholeText.Replace("\r\n", "~~~").Replace("\r",";").Replace("~~~","\n");
-
-			string[] lines = wholeText.Split('\n');
-			
 			Dictionary<string, int> ColumnDictionary = GetMarkCustColumns(lines[0]);
-			for (int i = 1; i < lines.Count(); i++)
-			{				 
-				string[] lineSplit = lines[i].Split(',');
-
-				if (lineSplit.Count() > 1)
+			for (int i = 1; i < lines.Count() - 1; i++)
+			{
+				markCusts.Add(new MarkCust(lines[i], ColumnDictionary)
 				{
-					markCusts.Add(new MarkCust
-					{
-						PreDir = lineSplit[ColumnDictionary[nameof(MarkCust.PreDir).ToLower()]].Replace("\"",""),
-						Latitude = Convert.ToDouble(lineSplit[ColumnDictionary[nameof(MarkCust.Latitude).ToLower()]].Replace("\"", "")),
-						Longitude = Convert.ToDouble(lineSplit[ColumnDictionary[nameof(MarkCust.Longitude).ToLower()]].Replace("\"", "")),
-						PostDir = lineSplit[ColumnDictionary[nameof(MarkCust.PostDir).ToLower()]].Replace("\"", ""),
-						Size = Convert.ToDouble(lineSplit[ColumnDictionary[nameof(MarkCust.Size).ToLower()]].Replace("\"", "")),
-						StreetNm = lineSplit[ColumnDictionary[nameof(MarkCust.StreetNm).ToLower()]].Replace("\"", ""),
-						StreetNo = lineSplit[ColumnDictionary[nameof(MarkCust.StreetNo).ToLower()]].Replace("\"", ""),
-						Suffix = lineSplit[ColumnDictionary[nameof(MarkCust.Suffix).ToLower()]].Replace("\"", ""),
-						Zip = lineSplit[ColumnDictionary[nameof(MarkCust.Zip).ToLower()]].Replace("\"", "")
-					});
-				}
-
+					CSVRowIndex = i,
+					FilePath = csvPath
+				});
 			}
 
 			return markCusts;
 		}
 
-		private Dictionary<string, int> GetMarkCustColumns(string line)
+		public static string[] GetCSVLines(string csvPath)
+		{
+			FileStream fileStream = new FileStream(csvPath, FileMode.Open);
+			StreamReader streamReader = new StreamReader(fileStream);
+
+			string wholeText = streamReader.ReadToEnd();
+			wholeText = wholeText.Replace("\r\n", "~~~").Replace("\r", ";").Replace("~~~", "\n");
+
+			string[] lines = wholeText.Split('\n');
+			streamReader.Dispose();
+			streamReader = null;
+			return lines;
+		}
+
+		public static Dictionary<string, int> GetMarkCustColumns(string line)
 		{
 			Dictionary<string, int> keyValues = new Dictionary<string, int>();
 			string[] header = line.Split(',');
 
 			string[] columns =
-				{ nameof(MarkCust.PreDir).ToLower(),
+				{
+					nameof(MarkCust.Cust_No).ToLower(),
+					nameof(MarkCust.PreDir).ToLower(),
 					nameof(MarkCust.Latitude).ToLower(),
 					nameof(MarkCust.Longitude).ToLower(),
 					nameof(MarkCust.PostDir).ToLower(),
