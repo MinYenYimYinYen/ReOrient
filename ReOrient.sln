@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReOrient", "ReOrient\ReOrient.csproj", "{164D020B-F1A6-4A16-8C50-DA7AE923ED8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LH_WPFTheme", "..\..\LH_WPFTheme\LH_WPFTheme\LH_WPFTheme.csproj", "{C424D656-9827-45E3-9103-66C0732DD5DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +17,15 @@ Global
 		{164D020B-F1A6-4A16-8C50-DA7AE923ED8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{164D020B-F1A6-4A16-8C50-DA7AE923ED8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{164D020B-F1A6-4A16-8C50-DA7AE923ED8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C424D656-9827-45E3-9103-66C0732DD5DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C424D656-9827-45E3-9103-66C0732DD5DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C424D656-9827-45E3-9103-66C0732DD5DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C424D656-9827-45E3-9103-66C0732DD5DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B95490D2-5FCF-4C57-A717-3FBE9B342256}
 	EndGlobalSection
 EndGlobal

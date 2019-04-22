@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:ReOrient"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:mod="clr-namespace:ReOrient.Models"
-        
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
 	<Window.Resources>
@@ -28,6 +27,7 @@
 				<TextBox  Width="65" Text="{Binding Path=SizeHi}" />
 				<Label Content="Load Count" />
 				<TextBox  Width="65" Text="{Binding Path=LoadCount}" />
+				<Button Name="btn_Load" Content="Load" Click="Btn_Load_Click"/>
 			</StackPanel>
 		</StackPanel>
 		<StackPanel DockPanel.Dock="Left">
@@ -62,24 +62,25 @@
                                        Template="{StaticResource PushPinTemplate}" Opacity="{Binding ElementName=OpacSlider, Path=Value}"
                                        Width="Auto" Height="Auto" Background="LightGray">
 							<m:Pushpin.Content>
-								<StackPanel>
+								<StackPanel Background="#FF81AB93" >
 									<Button Name="btn_Address"  Content="{Binding Path=Address}" Click="btn_Address_Click"/>
 									<StackPanel Orientation="Horizontal">
 										<StackPanel>
-											<Button Name="btn_Commercial" Content="777.01" Command="{Binding Path=Size77701}" CommandParameter="{Binding}"
+											<Button Name="btn_Commercial" Content="Commercial" Command="{Binding Path=Size77701}" CommandParameter="{Binding}"
                                                 Click="Disappear" MaxWidth="75"/>
-											<Button Name="btn_UnmeasurableSMall" Content="777.99" Command="{Binding Path=Size77799}" CommandParameter="{Binding}"
+											<Button Name="btn_UnmeasurableSMall" Content="SmallUnMsrble" Command="{Binding Path=Size77799}" CommandParameter="{Binding}"
                                                 Click="Disappear" MaxWidth="75"/>
-											<Button Name="btn_Over24" Content="99" Command="{Binding Path=Size99}" CommandParameter="{Binding}"
+											<Button Name="btn_Over24" Content="Over 24" Command="{Binding Path=Size99}" CommandParameter="{Binding}"
                                                 Click="Disappear" MaxWidth="75"/>
-											<TextBox Name="txt_Size" Width="20" Text="{Binding Path=NewSize}" LostFocus="Disappear" />
+											<TextBox Name="txt_Size" Width="30" Text="{Binding Path=NewSize}" LostFocus="Disappear" 
+															 Background="#85FFFF"/>
 										</StackPanel>
 										<StackPanel>
 											<Button Name="btn_0" Content="0.00" Command="{Binding Path=Size0}" CommandParameter="{Binding}"
                                                 Click="Disappear" MaxWidth="75"/>
-											<Button Name="btn_NotFound" Content="777.07" Command="{Binding Path=Size77707}" CommandParameter="{Binding}"
+											<Button Name="btn_NotFound" Content="NotFound" Command="{Binding Path=Size77707}" CommandParameter="{Binding}"
                                                 Click="Disappear" MaxWidth="75"/>
-											<StackPanel Orientation="Horizontal">
+											<!--<StackPanel Orientation="Horizontal">
 												<StackPanel>
 													<ComboBox Name="cbox_PreDir">
 														<ComboBoxItem Height="25" Content="  "/>
@@ -108,7 +109,7 @@
 													</ComboBox>
 													<Button Content="Post" Command="{Binding Path=AssignPostdir}" CommandParameter="{Binding}"/>
 												</StackPanel>
-											</StackPanel>
+											</StackPanel>-->
 										</StackPanel>
 									</StackPanel>
 								</StackPanel>

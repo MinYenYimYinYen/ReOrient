@@ -70,7 +70,6 @@ namespace ReOrient
 			set
 			{
 				_cSVPath = value;
-				LoadRecordsOnThread();
 			}
 		}
 
@@ -84,7 +83,6 @@ namespace ReOrient
 			set
 			{
 				sizeLo = value;
-				LoadRecordsOnThread();
 			}
 		}
 
@@ -98,7 +96,6 @@ namespace ReOrient
 			set
 			{
 				sizeHi = value;
-				LoadRecordsOnThread();
 			}
 		}
 
@@ -114,23 +111,20 @@ namespace ReOrient
 				{
 
 					_loadCount = value;
-					if (_loadCount < 1) LoadCount = 1;
+					if (_loadCount < 1)
+					{
+						LoadCount = 1;
+					}
 				}
 				catch (Exception)
 				{
 					_loadCount = 10;
 					throw;
 				}
-
-				LoadRecordsOnThread();
 			}
 		}
 
-
-
-
 		private static bool hennepinMode = false;
-
 		public static bool HennepinMode
 		{
 			get { return hennepinMode; }
@@ -139,47 +133,55 @@ namespace ReOrient
 				hennepinMode = value;
 			}
 		}
-		private void LoadRecordsOnThread()
-		{
-			Thread t = new Thread(new ThreadStart(LoadRecords));
-			t.Start();
-		}
+
+
+
 
 		private void LoadRecords()
 		{
-			if (SizeLo != null && SizeHi != null && File.Exists(CSVPath))
+			ObservableCollection<Record> recs = new ObservableCollection<Record>();
+			foreach (IMarkCust mark in MarkCusts)
 			{
-				ObservableCollection<Record> recs = new ObservableCollection<Record>();
-
-				//Filter By Zip
-				foreach (IMarkCust mark in MarkCusts)
-				{
-					recs.Add(new Record { MarkCust = mark });
-				}
-
-				//Filter by Size
-				//var rMe = new ObservableCollection<Record>();
-				IEnumerable<Record> filterSize = recs.Where(r => r.Size >= SizeLo)
-					.Where(r => r.Size <= SizeHi).ToList()
-					.Take(LoadCount);
-
-				//Filter IsDupes
-				//int IsDupe = 685;
-				//var custFlag = MainWindow.sa.custflags.Where(cf => cf.flag == IsDupe);
-
-
-				//Add the records
-				Dispatcher.Invoke(() => Records.Clear());
-				foreach (Record mark in filterSize)
-				{
-					Dispatcher.Invoke(() => Records.Add(new Record { MarkCust = mark.MarkCust }));
-				}
+				recs.Add(new Record { MarkCust = mark });
 			}
+
+			//Filter by Size
+			IEnumerable<Record> filterSize = recs.Where(r => r.Size >= SizeLo)
+				.Where(r => r.Size <= SizeHi).ToList()
+				.Take(LoadCount);
+
+
+
+			//Add the records
+			Dispatcher.Invoke(() => Records.Clear());
+			foreach (Record mark in filterSize)
+			{
+				Dispatcher.Invoke(() => Records.Add(new Record { MarkCust = mark.MarkCust }));
+			}
+		}
+
+		private bool CanLoadRecords()
+		{
+			return SizeLo != null && SizeHi != null && File.Exists(CSVPath);
 		}
 
 		private void Disappear(object sender, RoutedEventArgs e)
 		{
 			DependencyObject btn = (DependencyObject)sender;
+
+			try
+			{
+				TextBox sizeBox = (TextBox)sender;
+				if(sizeBox.Name == "txt_Size")
+				{
+					if(string.IsNullOrWhiteSpace(sizeBox.Text) || sizeBox.Text  == "0")
+					{
+						return;
+					}
+				}
+			}
+			catch (Exception)			{			}
+
 			DependencyObject x = VisualTreeHelper.GetParent(btn);
 			DependencyObject y = VisualTreeHelper.GetParent(x);
 			DependencyObject z = VisualTreeHelper.GetParent(y);
@@ -213,19 +215,11 @@ namespace ReOrient
 
 		}
 
-
-
-		[Obsolete]
-		public string ZipCode
+		private void Btn_Load_Click(object sender, RoutedEventArgs e)
 		{
-			get
+			if (CanLoadRecords())
 			{
-				return zipCode;
-			}
-			set
-			{
-				zipCode = value;
-				LoadRecordsOnThread();
+				LoadRecords();
 			}
 		}
 	}
