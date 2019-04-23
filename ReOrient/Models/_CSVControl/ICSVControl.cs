@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ReOrient.Models
 {
-	public interface ICSVControl
+	public interface ICSVControl<TObj>
 	{
-		IEnumerable<IMarkCust> GetMarkCustsFromCSV(string csvPath);
+		IEnumerable<TObj> GetObjectsFromCSV(string csvPath);
 	}
 }

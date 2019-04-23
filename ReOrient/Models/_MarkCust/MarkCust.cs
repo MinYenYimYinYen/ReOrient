@@ -54,7 +54,10 @@ namespace ReOrient.Models
 			set
 			{
 				_size = value;
-				WriteChanges();
+				if (canWriteChanges(value))
+				{
+					WriteChanges();
+				}
 			}
 		}
 
@@ -64,10 +67,18 @@ namespace ReOrient.Models
 
 		public DateTime LastChange { get; set; }
 
+		public bool canWriteChanges(double? value)
+		{
+			if (value < 0) { return false; }
+			return true;
+		}
+
 		public void WriteChanges()
 		{
-			string[] lines = CSVControl.GetCSVLines(FilePath);
-			Dictionary<string, int> columnDict = CSVControl.GetMarkCustColumns(lines[0]);
+			MarkCustCSVControl cSVControl = new MarkCustCSVControl();
+
+			string[] lines = cSVControl.GetCSVLines(FilePath);
+			Dictionary<string, int> columnDict = cSVControl.GetColumnDictionary(lines[0]);
 
 				if (Cust_No == new MarkCust(lines[CSVRowIndex], columnDict).Cust_No)
 				{

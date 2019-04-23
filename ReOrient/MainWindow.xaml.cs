@@ -26,8 +26,6 @@ namespace ReOrient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		[Obsolete]
-		private string zipCode;
 		private int _loadCount = 10;
 
 		public MainWindow()
@@ -38,7 +36,23 @@ namespace ReOrient
 		public string MapCenter => "45.26653,-93.77274";
 		//public string MapMode { get; set; }
 
-		public IEnumerable<IMarkCust> MarkCusts => new CSVControl().GetMarkCustsFromCSV(CSVPath);
+		public IEnumerable<IMarkCust> MarkCusts
+		{
+			get
+			{
+				try
+				{
+					return new MarkCustCSVControl().GetObjectsFromCSV(CSVPath);
+				}
+				catch (IOException ex)
+				{
+
+					MessageBox.Show(ex.Message);
+					return new List<MarkCust>();
+				}
+				
+			}
+		}
 
 
 		private ObservableCollection<Record> records;
@@ -148,6 +162,12 @@ namespace ReOrient
 			//Filter by Size
 			IEnumerable<Record> filterSize = recs.Where(r => r.Size >= SizeLo)
 				.Where(r => r.Size <= SizeHi).ToList()
+				.OrderBy(r=>r.MarkCust.Zip.Substring(0,5))
+				.ThenBy(r=>r.MarkCust.StreetNm)
+				.ThenBy(r=>r.MarkCust.Suffix)
+				.ThenBy(r=>r.MarkCust.PreDir)
+				.ThenBy(r => r.MarkCust.PostDir)
+				.ThenBy(r=>r.MarkCust.StreetNo)
 				.Take(LoadCount);
 
 
@@ -178,7 +198,19 @@ namespace ReOrient
 					{
 						return;
 					}
+
+					try
+					{
+						var dbl = Convert.ToDouble( sizeBox.Text);
+						if (dbl < 0) { return; }
+					}
+					catch (Exception)
+					{
+
+						return ;
+					}
 				}
+
 			}
 			catch (Exception)			{			}
 
