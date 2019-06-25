@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReOrient", "ReOrient\ReOrient.csproj", "{164D020B-F1A6-4A16-8C50-DA7AE923ED8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LH_WPFTheme", "..\..\LH_WPFTheme\LH_WPFTheme\LH_WPFTheme.csproj", "{C424D656-9827-45E3-9103-66C0732DD5DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LH_WPFTheme", "..\LH_WPFTheme\LH_WPFTheme\LH_WPFTheme.csproj", "{C424D656-9827-45E3-9103-66C0732DD5DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

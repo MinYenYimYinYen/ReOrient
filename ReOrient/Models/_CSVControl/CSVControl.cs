@@ -92,7 +92,7 @@ namespace ReOrient.Models
 
 			for (int i = 0; i < headerArray.Count(); i++)
 			{
-				if (_markCustColumns.Contains(headerArray[i]))
+				if (_markCustColumns.Contains(headerArray[i].ToLower()))
 				{
 					keyValues.Add(headerArray[i].ToLower(), i);
 				}

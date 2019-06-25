@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReOrient"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
-        xmlns:mod="clr-namespace:ReOrient.Models"
-				xmlns:behave ="clr-namespace:CustomBehavior;assembly=LH_WPFTheme"
+        xmlns:mod="clr-namespace:ReOrient.Models"        
+		xmlns:behave ="clr-namespace:CustomBehavior;assembly=LH_WPFTheme"        
         mc:Ignorable="d"
 				
         Title="MainWindow" Height="350" Width="525">

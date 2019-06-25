@@ -74,7 +74,7 @@ namespace ReOrient
 			}
 		}
 
-		private string _cSVPath = @"D:\SharePoint\GM Lawncare Inc\Boss Group - Documents\Big Data\Post Apocalypse\BLOCKLEADTEST.CSV";
+        private string _cSVPath;
 		public string CSVPath
 		{
 			get
@@ -83,7 +83,8 @@ namespace ReOrient
 			}
 			set
 			{
-				_cSVPath = value;
+
+			    _cSVPath = value;
 			}
 		}
 
