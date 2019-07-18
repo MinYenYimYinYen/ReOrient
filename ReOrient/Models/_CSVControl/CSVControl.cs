@@ -21,7 +21,7 @@ namespace ReOrient.Models
 					nameof(MarkCust.Latitude).ToLower(),
 					nameof(MarkCust.Longitude).ToLower(),
 					nameof(MarkCust.PostDir).ToLower(),
-					nameof(MarkCust.Size).ToLower(),
+					nameof(MarkCust.CustSize).ToLower(),
 					nameof(MarkCust.StreetNm).ToLower(),
 					nameof(MarkCust.StreetNo).ToLower(),
 					nameof(MarkCust.Suffix).ToLower(),

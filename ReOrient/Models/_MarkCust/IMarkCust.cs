@@ -19,7 +19,7 @@ namespace ReOrient.Models
 		double Latitude { get; set; }
 		double Longitude { get; set; }
 
-		double? Size { get; set; }
+		double? CustSize { get; set; }
 
 		string FilePath { get; set; }
 		int CSVRowIndex { get; set; }

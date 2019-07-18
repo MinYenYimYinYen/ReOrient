@@ -19,7 +19,7 @@ namespace ReOrient.Models
 			Latitude = Convert.ToDouble(lineSplit[columnDictionary[nameof(Latitude).ToLower()]].Replace("\"", ""));
 			Longitude = Convert.ToDouble(lineSplit[columnDictionary[nameof(Longitude).ToLower()]].Replace("\"", ""));
 			PostDir = lineSplit[columnDictionary[nameof(PostDir).ToLower()]].Replace("\"", "");
-			_size = Convert.ToDouble(lineSplit[columnDictionary[nameof(Size).ToLower()]].Replace("\"", ""));
+			_size = Convert.ToDouble(lineSplit[columnDictionary[nameof(CustSize).ToLower()]].Replace("\"", ""));
 			StreetNm = lineSplit[columnDictionary[nameof(StreetNm).ToLower()]].Replace("\"", "");
 			StreetNo = lineSplit[columnDictionary[nameof(StreetNo).ToLower()]].Replace("\"", "");
 			Suffix = lineSplit[columnDictionary[nameof(Suffix).ToLower()]].Replace("\"", "");
@@ -45,7 +45,7 @@ namespace ReOrient.Models
 
 		public double Longitude { get; set; }
 
-		public double? Size
+		public double? CustSize
 		{
 			get
 			{
@@ -83,8 +83,8 @@ namespace ReOrient.Models
 				if (Cust_No == new MarkCust(lines[CSVRowIndex], columnDict).Cust_No)
 				{
 					string[] elements = lines[CSVRowIndex].Split(',');
-					int column = columnDict[nameof(Size).ToLower()];
-					elements[column] = Size.ToString();
+					int column = columnDict[nameof(CustSize).ToLower()];
+					elements[column] = CustSize.ToString();
 					lines[CSVRowIndex] = string.Join(",", elements);
 				}
 

@@ -62,7 +62,7 @@ namespace ReOrient.Models
 		private void _Size77701(object RecordObj)
 		{
 			Record rec = (Record)RecordObj;
-			rec.MarkCust.Size = 777.01;
+			rec.MarkCust.CustSize = 777.01;
 		}
 		private bool _Size77701Exec(object RecordObj)
 		{
@@ -73,7 +73,7 @@ namespace ReOrient.Models
 		private void _Size77799(object RecordObj)
 		{
 			Record rec = (Record)RecordObj;
-			rec.MarkCust.Size = 777.99;
+			rec.MarkCust.CustSize = 777.99;
 		}
 		private bool _Size77799Exec(object RecordObj)
 		{
@@ -84,7 +84,7 @@ namespace ReOrient.Models
 		private void _Size99(object RecordObj)
 		{
 			Record rec = (Record)RecordObj;
-			rec.MarkCust.Size = 99;
+			rec.MarkCust.CustSize = 99;
 		}
 		private bool _Size99Exec(object RecordObj)
 		{
@@ -95,7 +95,7 @@ namespace ReOrient.Models
 		private void _Size0(object RecordObj)
 		{
 			Record rec = (Record)RecordObj;
-			rec.MarkCust.Size = 0;
+			rec.MarkCust.CustSize = 0;
 		}
 		private bool _Size0Exec(object RecordObj)
 		{
@@ -106,7 +106,7 @@ namespace ReOrient.Models
 		private void _Size77707(object RecordObj)
 		{
 			Record rec = (Record)RecordObj;
-			rec.MarkCust.Size = 777.07;
+			rec.MarkCust.CustSize = 777.07;
 		}
 		private bool _Size77707Exec(object RecordObj)
 		{
@@ -200,7 +200,7 @@ namespace ReOrient.Models
 			}
 		}
 
-		public double Size => (double)(MarkCust.Size == null ? 0 : MarkCust.Size);
+		public double Size => (double)(MarkCust.CustSize == null ? 0 : MarkCust.CustSize);
 
 
 		private string preDir;
@@ -235,7 +235,7 @@ namespace ReOrient.Models
 			set
 			{
 				newSize = value;
-				MarkCust.Size = newSize;
+				MarkCust.CustSize = newSize;
 			}
 		}
 
